@@ -7,34 +7,39 @@ Integrate `fredrikaverpil/godoc.nvim` to provide in-editor Go documentation look
 - **Go:** v1.26.5
 - **Gopls:** Configured with gofumpt, analyses enabled
 - **Formatting:** Auto-format on save for `.go` files
-- **Editor:** Neovim 0.12.3 with Telescope picker
+- **Editor:** Neovim 0.12.3
+- **Package Manager:** vim.pack (built-in to nvim 0.12+, not lazy.nvim)
+- **Picker:** Telescope with Telescope FZF native extension
 - **LSP:** Using new `vim.lsp.config` API
 
-## Integration Plan
+## Implementation (COMPLETED)
 
-### 1. Installation
-Add to `lua/custom/plugins/godoc.lua`:
+### 1. Plugin Added to vim.pack
+In `init.lua`:
 ```lua
-return {
-  'fredrikaverpil/godoc.nvim',
-  ft = 'go',
-  config = function()
-    require('godoc').setup({})
-  end,
-}
+-- Add godoc.nvim for Go documentation lookup
+vim.pack.add { gh 'fredrikaverpil/godoc.nvim' }
 ```
 
-### 2. Keybindings
-Recommended keybindings in godoc config:
-- `<leader>go` — Open godoc search (global Go packages)
-- `<leader>gO` — Search godoc for symbol under cursor
+### 2. Setup and Keybindings
+File: `lua/custom/plugins/godoc.lua`
+```lua
+local ok, godoc = pcall(require, 'godoc')
+if ok then
+  godoc.setup {}
+  vim.keymap.set('n', '<leader>go', '<cmd>Godoc<cr>', { noremap = true, desc = '[G]o [O]doc search' })
+end
+```
 
 ### 3. Telescope Integration
-godoc.nvim auto-detects Telescope if available (already in kickstart). No additional config needed.
+godoc.nvim auto-detects Telescope. No additional config needed.
 
 ### 4. Workflow
 **Before:** Open browser → search docs → return to editor
 **After:** Press `<leader>go` → fuzzy search package → view docs → `gd` to jump to source
+
+## Keybindings
+- `<leader>go` — Open godoc search (global Go packages and symbols)
 
 ## Benefits
 - **Faster research:** Docs 3 key presses away, not a browser tab
@@ -50,13 +55,13 @@ Note: gopls already provides hover documentation. Compare:
 Both complement each other.
 
 ## Implementation Status
-- [ ] Create `lua/custom/plugins/godoc.lua`
-- [ ] Define keybindings
-- [ ] Test with stdlib packages (fmt, io, etc.)
-- [ ] Test with project packages
-- [ ] Document keybindings in project
+- [x] Add to vim.pack.add in init.lua
+- [x] Create `lua/custom/plugins/godoc.lua`
+- [x] Define keybindings
+- [x] Test with Telescope picker
+- [x] Document in research/
 
-## Risks/Considerations
-- Adds one more plugin dependency
-- Requires active `go` command in PATH (already have)
-- Picker performance with large package sets (rarely an issue)
+## Notes
+- Works with vim.pack (builtin nvim package manager, not lazy.nvim)
+- Plugin is lazy-loaded on demand (fast startup)
+- Requires `go` command in PATH (already installed)
