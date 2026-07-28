@@ -1,10 +1,6 @@
-return {
-  'fredrikaverpil/godoc.nvim',
-  ft = 'go',
-  keys = {
-    { '<leader>go', '<cmd>Godoc<cr>', desc = '[G]o [O]doc search' },
-  },
-  config = function()
-    require('godoc').setup {}
-  end,
-}
+-- Godoc.nvim setup (plugin is loaded via vim.pack in init.lua)
+local ok, godoc = pcall(require, 'godoc')
+if ok then
+  godoc.setup {}
+  vim.keymap.set('n', '<leader>go', '<cmd>Godoc<cr>', { noremap = true, desc = '[G]o [O]doc search' })
+end

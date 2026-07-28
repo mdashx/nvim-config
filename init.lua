@@ -511,6 +511,9 @@ do
   pcall(require('telescope').load_extension, 'fzf')
   pcall(require('telescope').load_extension, 'ui-select')
 
+  -- Add godoc.nvim for Go documentation lookup
+  vim.pack.add { gh 'fredrikaverpil/godoc.nvim' }
+
   -- See `:help telescope.builtin`
   local builtin = require 'telescope.builtin'
   vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
