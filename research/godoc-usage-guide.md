@@ -131,28 +131,39 @@ Use Telescope's layout options.
 - `*` → all stdlib packages
 - `time.Duration` → Duration type in time package
 
-### Tip 4: Complement Hover
-Use `K` for quick hover, godoc for deep dives:
+### Tip 4: Three-Way Documentation Lookup
+Use different tools for different needs:
 
+**Quick hover (K):**
 ```go
 func doSomething(ctx context.Context) error {
-                 ↑
-            Press K for quick hover
-                 
-func doSomething(ctx context.Context) error {
-    // Need more context on Context interface?
-    // Press <leader>gO, search "context"
+                 ↑ Press K for signature
 ```
 
-## Comparison: godoc vs Built-in Alternatives
+**For packages/functions (<leader>gO):**
+```go
+fmt.Println("hello")
+    ↑ Press <leader>gO for godoc
+```
 
-| Task | godoc.nvim | Hover (K) | LSP GoTo | Browser |
-|------|-----------|-----------|----------|---------|
-| Quick type signature | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ⭐ |
-| Browse package | ⭐⭐⭐ | ⭐ | ⭐ | ⭐⭐⭐ |
-| Find examples | ⭐⭐⭐ | ⭐ | ⭐ | ⭐⭐⭐ |
-| Discover APIs | ⭐⭐⭐ | ⭐ | ⭐ | ⭐⭐ |
-| Jump to source | ⭐⭐ | ⭐ | ⭐⭐⭐ | ⭐ |
+**For keywords/offline docs (<leader>gs):**
+```go
+if err != nil {  // Press <leader>gs on "if" for spec
+    ↑
+    Offline go doc in split
+}
+```
+
+## Comparison: Documentation Tools
+
+| Task | godoc.nvim | go doc (`<leader>gs`) | Hover (K) | LSP GoTo |
+|------|-----------|-----------|----------|----------|
+| Quick type signature | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ |
+| Keywords (if, for, type) | ⭐ | ⭐⭐⭐ | ⭐ | ⭐ |
+| Browse package | ⭐⭐⭐ | ⭐⭐ | ⭐ | ⭐ |
+| Find examples | ⭐⭐⭐ | ⭐⭐ | ⭐ | ⭐ |
+| Discover APIs | ⭐⭐⭐ | ⭐⭐ | ⭐ | ⭐ |
+| Offline/No internet | ⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐ |
 
 ## Troubleshooting
 

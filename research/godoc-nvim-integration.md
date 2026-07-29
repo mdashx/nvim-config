@@ -39,8 +39,13 @@ godoc.nvim auto-detects Telescope. No additional config needed.
 **After:** Press `<leader>go` → fuzzy search package → view docs → `gd` to jump to source
 
 ## Keybindings
-- `<leader>go` — Open godoc search (global Go packages and symbols)
-- `<leader>gO` — Search godoc for symbol/keyword under cursor (like IDE "go to definition" for docs)
+
+### Godoc.nvim (Package/Symbol Documentation)
+- `<leader>go` — Open godoc picker (search packages/symbols)
+- `<leader>gO` — Search godoc for symbol/keyword under cursor
+
+### Go Doc Command (Keywords + Packages)
+- `<leader>gs` — View `go doc` output for word under cursor (offline, handles keywords)
 
 ## Benefits
 - **Faster research:** Docs 3 key presses away, not a browser tab
