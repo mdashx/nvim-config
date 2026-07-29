@@ -18,15 +18,9 @@ local function go_doc_word_under_cursor()
   -- Set buffer name
   vim.api.nvim_buf_set_name(0, 'go doc: ' .. word)
 
-  -- Run go doc and capture output
-  local handle = io.popen('go doc ' .. word .. ' 2>&1')
-  if not handle then
-    vim.notify('Failed to run go doc', vim.log.levels.ERROR)
-    return
-  end
-
-  local output = handle:read('*a')
-  handle:close()
+  -- Run go doc using vim.system (neovim 0.10+)
+  local result = vim.system({ 'go', 'doc', word }, { text = true }):wait()
+  local output = result.stdout or 'No documentation found'
 
   -- Insert output into buffer
   local lines = vim.split(output, '\n')
