@@ -7,9 +7,10 @@ if ok then
     split = 'vsplit',
   }
 
-  -- Search godoc for current word under cursor
+  -- Search godoc for current word under cursor (in vertical split)
   local function godoc_word_under_cursor()
     local word = vim.fn.expand('<cword>')
+    vim.cmd('vsplit')  -- Open vertical split first
     if word == '' then
       vim.cmd('GoDoc')
     else
@@ -17,7 +18,13 @@ if ok then
     end
   end
 
-  vim.keymap.set('n', '<leader>go', '<cmd>GoDoc<cr>', { noremap = true, desc = '[G]o [D]oc search' })
+  -- Open godoc in vertical split
+  local function godoc_search()
+    vim.cmd('vsplit')
+    vim.cmd('GoDoc')
+  end
+
+  vim.keymap.set('n', '<leader>go', godoc_search, { noremap = true, desc = '[G]o [D]oc search' })
   vim.keymap.set('n', '<leader>gO', godoc_word_under_cursor, { noremap = true, desc = '[G]o [D]oc for word under cursor' })
 else
   vim.notify('godoc.nvim failed to load', vim.log.levels.WARN)
