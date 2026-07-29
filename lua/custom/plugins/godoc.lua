@@ -2,7 +2,10 @@
 vim.cmd.packadd('godoc.nvim')
 local ok, godoc = pcall(require, 'godoc')
 if ok then
-  godoc.setup {}
+  godoc.setup {
+    -- Open results in vertical split to the right
+    split = 'vsplit',
+  }
 
   -- Search godoc for current word under cursor
   local function godoc_word_under_cursor()
