@@ -48,12 +48,18 @@ godoc.nvim auto-detects Telescope. No additional config needed.
 - **Go stdlib + third-party:** Works for all importable packages
 - **Symbol lookup:** Find specific functions/types quickly
 
-## Alternative: Hover Docs
-Note: gopls already provides hover documentation. Compare:
-- **Hover (`K`):** Quick reference for symbol under cursor
-- **godoc search:** Browse packages/stdlib, discover APIs
+## Limitations & Alternatives
 
-Both complement each other.
+**Godoc limitation:** Only indexes packages/symbols, NOT language keywords
+- Keywords (`if`, `for`, `func`, `type`, etc.) have no godoc entries
+- Use `K` (hover) or Go Spec reference for keywords
+
+**Three-way documentation lookup:**
+- **Hover (`K`):** Quick signature/hover
+- **`<leader>gO`:** Godoc for word under cursor (packages/functions/types)
+- **`<leader>gs`:** Go spec for language keywords (future: to implement)
+
+Both godoc and hover complement each other — combine them for full coverage.
 
 ## Implementation Status
 - [x] Add to vim.pack.add in init.lua
