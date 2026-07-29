@@ -18,15 +18,25 @@ Example: Standing on `fmt.Println` usage, `<leader>gO` shows Println docs.
 
 ## Common Workflows
 
-### Workflow 1: Exploring Standard Library
+### Workflow 1: Quick Lookup (Cursor-based)
 ```go
 // You're writing HTTP server code
 http.ListenAndServe(":8080", nil)
-                    ↑
-                Press <leader>go
-                Search "http"
-                View http package docs
-                Discover http.Handler, http.Server, etc.
+      ↑ cursor here
+    Press <leader>gO (capital O)
+    Godoc instantly searches for "ListenAndServe"
+    View documentation without typing
+```
+
+### Workflow 2: Exploring Standard Library
+```go
+// You're writing HTTP server code
+http.ListenAndServe(":8080", nil)
+      ↑
+    Press <leader>go
+    Type "http" to search http package
+    View http package docs
+    Discover http.Handler, http.Server, etc.
 ```
 
 ### Workflow 2: Learning Third-Party API

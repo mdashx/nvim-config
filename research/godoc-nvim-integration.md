@@ -40,6 +40,7 @@ godoc.nvim auto-detects Telescope. No additional config needed.
 
 ## Keybindings
 - `<leader>go` — Open godoc search (global Go packages and symbols)
+- `<leader>gO` — Search godoc for symbol/keyword under cursor (like IDE "go to definition" for docs)
 
 ## Benefits
 - **Faster research:** Docs 3 key presses away, not a browser tab
